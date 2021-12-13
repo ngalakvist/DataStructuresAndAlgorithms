@@ -13,6 +13,10 @@
       this.Data = value;
     }
 
+    /// <summary>
+    /// Insert.
+    /// </summary>
+    /// <param name="value"></param>
     public void Insert(int value)
     {
       if (value <= Data)
@@ -30,6 +34,34 @@
           Right.Insert(value);
       }
     }
+
+    /// <summary>
+    /// Contains
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public bool Contains(int value)
+    {
+      if (Data == value)
+        return true;
+      else if (Left != null)
+      {
+        if (value < Data)
+          return Left.Contains(value);
+      }
+
+      else if (Right != null)
+      {
+        if (value > Data)
+          return Right.Contains(value);
+      }
+      return false;
+    }
+
+
+    /// <summary>
+    /// Print
+    /// </summary>
 
     public void PrintInOrder()
     {
