@@ -5,15 +5,23 @@ namespace ConsoleApp3
 {
   public class Graph
   {
-    private class Vertex
+    private int Id = 0;
+    public class Vertex
     {
+      public int Id = 0;
       public Dictionary<string, int> neighbours = new Dictionary<string, int>();
+      public LinkedList<Vertex> adjacent = new LinkedList<Vertex>();
+      public Vertex(int id)
+      {
+        this.Id = id;
+      }
     }
     private Dictionary<string, Vertex> vertices = new Dictionary<string, Vertex>();
 
     public void addVertex(String vname)
     {
-      Vertex v = new Vertex();
+      Id++;
+      Vertex v = new Vertex(Id);
       vertices.Add(vname, v);
     }
 
@@ -67,18 +75,24 @@ namespace ConsoleApp3
       return false;
     }
 
-    public bool BFS(List<string> list, string source, string searchItem)
+    public bool BFS(Vertex source, Vertex destination)
     {
-      Queue<string> kö = new Queue<string>();
-      HashSet<string> memo = new HashSet<string>();
-      kö.Enqueue(list[0]);
-      while (kö.Count > 0)
+      Queue<Vertex> nextToVisit = new Queue<Vertex>();
+      HashSet<int> memo = new HashSet<int>();
+      nextToVisit.Enqueue(source);
+      while (nextToVisit.Count > 0)
       {
-        if (source == searchItem)
+        var node = nextToVisit.Dequeue();
+        if (node == destination)
           return true;
-        if (memo.Contains(source))
+        if (memo.Contains(source.Id))
           continue;
-        memo.Add(source);
+        memo.Add(source.Id);
+        foreach (var item in node.adjacent)
+        {
+          nextToVisit.Enqueue(item);
+        }
+
       }
       return true;
     }
