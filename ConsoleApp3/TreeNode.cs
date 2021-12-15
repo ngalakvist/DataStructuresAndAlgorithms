@@ -44,17 +44,14 @@
     {
       if (Data == value)
         return true;
-      else if (Left != null)
-      {
-        if (value < Data)
-          return Left.Contains(value);
-      }
+      if (Left == null && Right == null)
+        return false;
+      if (value < Data)
+        return Left.Contains(value);
+      else
+      if (value > Data)
+        return Right.Contains(value);
 
-      else if (Right != null)
-      {
-        if (value > Data)
-          return Right.Contains(value);
-      }
       return false;
     }
 
