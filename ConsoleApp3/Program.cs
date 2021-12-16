@@ -1,11 +1,15 @@
-﻿namespace ConsoleApp3
+﻿using System;
+
+namespace ConsoleApp3
 {
   internal class Program
   {
     private static void Main(string[] args)
     {
-
-      GraphClient();
+      var arr = new int[] { 4, 2, 1, 7, 8, 1, 2, 8, 1, 0 };
+      int v = MaxSumSubArray(arr, 3);
+      Console.WriteLine("Ans MaxSumArray(arr, 3)= " + v);
+      //GraphClient();
     }
 
     private static void TreeNodeHandler()
@@ -47,5 +51,32 @@
       graph.display();
     }
 
+    /// <summary>
+    /// Sliding window teknik
+    /// </summary>
+    /// <param name="arr"></param>
+    /// <param name="k"></param>
+    /// <returns></returns>
+
+    public static int MaxSumSubArray(int[] arr, int k)
+    {
+      // Check inputs
+
+      var max = int.MinValue;
+      int currentRunningSum = 0;
+
+      for (int i = 0; i < arr.Length; i++)
+      {
+        currentRunningSum += arr[i];
+        int realIndex = k - 1;
+        if (i >= realIndex)
+        {
+          max = Math.Max(max, currentRunningSum);
+          currentRunningSum -= arr[i - realIndex];
+        }
+
+      }
+      return max;
+    }
   }
 }
