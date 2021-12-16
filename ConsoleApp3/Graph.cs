@@ -16,7 +16,41 @@ namespace ConsoleApp3
         this.Id = id;
       }
     }
+
+    public class Node
+    {
+      public int Id = 0;
+      public LinkedList<Node> adjacent = new LinkedList<Node>();
+      public Node(int id)
+      {
+        this.Id = id;
+      }
+    }
     private Dictionary<string, Vertex> vertices = new Dictionary<string, Vertex>();
+    private Dictionary<int, Node> nodeLookUp = new Dictionary<int, Node>();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    private Node GetNode(int id)
+    {
+      return nodeLookUp.GetValueOrDefault(id);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="destination"></param>
+    private void AddEdge(int source, int destination)
+    {
+      Node s = GetNode(source);
+      Node d = GetNode(destination);
+      s.adjacent.AddLast(d);
+    }
+
 
     public void addVertex(String vname)
     {
