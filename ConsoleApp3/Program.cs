@@ -6,10 +6,12 @@ namespace ConsoleApp3
   {
     private static void Main(string[] args)
     {
-      var arr = new int[] { 4, 2, 1, 7, 8, 1, 2, 8, 1, 0 };
-      int v = MaxSumSubArray(arr, 3);
-      Console.WriteLine("Ans MaxSumArray(arr, 3)= " + v);
+      //var arr = new int[] { 4, 2, 1, 7, 8, 1, 2, 8, 1, 0 };
+      //int v = MaxSumSubArray(arr, 3);
+      //Console.WriteLine("Ans MaxSumArray(arr, 3)= " + v);
       //GraphClient();
+      PrintSubSets("abc");
+      //PrintPermutions("abcd");
     }
 
     private static void TreeNodeHandler()
@@ -78,5 +80,53 @@ namespace ConsoleApp3
       }
       return max;
     }
+
+
+    public static void PrintSubSets(string s)
+    {
+      PrintSubSets("", s);
+
+    }
+
+    public static void PrintSubSets(string sofar, string rest)
+    {
+      if (rest == "")
+      {
+        Console.WriteLine(sofar);
+      }
+      else
+      {
+        PrintSubSets(sofar + rest[0], rest.Substring(1));
+        PrintSubSets(sofar, rest.Substring(1));
+      }
+    }
+
+
+    public static void PrintPermutions(string s)
+    {
+      PrintPermutions("", s);
+    }
+    private static void PrintPermutions(string prefix, string remainder)
+    {
+      if (remainder.Length == 0)
+      {
+        Console.WriteLine(prefix);
+      }
+      else
+      {
+        for (int i = 0; i < remainder.Length; i++)
+        {
+          string before = remainder.Substring(0, i);
+          string after = remainder.Substring(i + 1, remainder.Length);
+          char c = remainder[i];
+          PrintPermutions(prefix + c, before + after);
+        }
+
+      }
+    }
+
   }
+
 }
+
+
