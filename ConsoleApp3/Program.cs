@@ -10,8 +10,8 @@ namespace ConsoleApp3
       //int v = MaxSumSubArray(arr, 3);
       //Console.WriteLine("Ans MaxSumArray(arr, 3)= " + v);
       //GraphClient();
-      PrintSubSets("abc");
-      //PrintPermutions("abcd");
+      //PrintSubSets("abc");
+      PrintPermutions("abc");
     }
 
     private static void TreeNodeHandler()
@@ -108,18 +108,21 @@ namespace ConsoleApp3
     }
     private static void PrintPermutions(string prefix, string remainder)
     {
-      if (remainder.Length == 0)
+      if (remainder == "")
       {
         Console.WriteLine(prefix);
       }
       else
       {
-        for (int i = 0; i < remainder.Length; i++)
+        var len = remainder.Length;
+        for (int i = 0; i < len; i++)
         {
           string before = remainder.Substring(0, i);
-          string after = remainder.Substring(i + 1, remainder.Length);
-          char c = remainder[i];
-          PrintPermutions(prefix + c, before + after);
+          char current = remainder[i];
+          var start = i + 1;
+          var nyLength = len - start;
+          string after = remainder.Substring(i + 1, nyLength);
+          PrintPermutions(prefix + current, before + after);
         }
 
       }

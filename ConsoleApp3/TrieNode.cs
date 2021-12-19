@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp3
+﻿using System.Collections.Generic;
+
+namespace ConsoleApp3
 {
   public class TrieNode
   {
@@ -6,10 +8,12 @@
     private bool end = false;
     private static int MAX = 26;
     public TrieNode[] Children = new TrieNode[MAX];
+    public Dictionary<char, TrieNode> TheChildren = new Dictionary<char, TrieNode>(); // Just another way without using an array
 
     private int GetCharIndex(char c)
     {
       return c - 'a';
+
     }
 
     private TrieNode GetTrieNode(char c)
