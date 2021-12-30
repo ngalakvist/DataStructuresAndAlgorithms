@@ -6,12 +6,23 @@ namespace ConsoleApp3
   {
     private static void Main(string[] args)
     {
-      //var arr = new int[] { 4, 2, 1, 7, 8, 1, 2, 8, 1, 0 };
-      //int v = MaxSumSubArray(arr, 3);
-      //Console.WriteLine("Ans MaxSumArray(arr, 3)= " + v);
-      //GraphClient();
-      //PrintSubSets("abc");
-      PrintPermutions("abc");
+      var arr = new int[] { 4, 2, 1, 7, 8, 1, 2, 8, 1, 0 };
+      /*
+            Example 1:
+         Input: nums = [1, 2, 3, 1]
+         Output: 4
+         Explanation: Rob house 1(money = 1) and then rob house 3(money = 3).
+         Total amount you can rob = 1 + 3 = 4.
+         Example 2:
+         Input: nums = [2, 7, 9, 3, 1]
+         Output: 12 */
+
+      var nums = new int[] { 1, 2, 3, 1 };
+      var length = nums.Length;
+      var memo = new int[length + 1];
+      var max = new DynamicProgramming().RobHouse(nums, length, memo);
+      Console.WriteLine("The max money is: " + max);
+      Console.ReadLine();
     }
 
     private static void TreeNodeHandler()
