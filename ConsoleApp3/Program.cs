@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleApp3
 {
@@ -6,23 +7,46 @@ namespace ConsoleApp3
   {
     private static void Main(string[] args)
     {
-      var arr = new int[] { 4, 2, 1, 7, 8, 1, 2, 8, 1, 0 };
-      /*
-            Example 1:
-         Input: nums = [1, 2, 3, 1]
-         Output: 4
-         Explanation: Rob house 1(money = 1) and then rob house 3(money = 3).
-         Total amount you can rob = 1 + 3 = 4.
-         Example 2:
-         Input: nums = [2, 7, 9, 3, 1]
-         Output: 12 */
+      var arr = new int[] { 2, 7, 11, 15 };
+      var result = GetSubsets(arr);
+      foreach (var item in result)
+      {
+        Console.WriteLine(string.Join(',', item));
+      }
+      Console.ReadLine();
+    }
 
+    private static void BuildAHashTableUsingCharArrays(string s)
+    {
+      var str = s.ToCharArray();
+      int NUMBEROFALFABETS_ENGLISH = 26;
+      var arrVal = new int[NUMBEROFALFABETS_ENGLISH];
+      for (int i = 0; i < str.Length; i++)
+      {
+        var index = str[i] - 'a';
+        arrVal[index]++;
+      }
+      for (int i = 0; i < NUMBEROFALFABETS_ENGLISH; i++)
+      {
+        Console.WriteLine($"{str[i]}:{arrVal[i] }");
+      }
+    }
+
+    private static void DynamicPrograming()
+    {
+      /*  Example 1:
+          Input: nums = [1, 2, 3, 1]
+          Output: 4
+          Explanation: Rob house 1(money = 1) and then rob house 3(money = 3).
+          Total amount you can rob = 1 + 3 = 4.
+          Example 2:
+          Input: nums = [2, 7, 9, 3, 1]
+          Output: 12 */
       var nums = new int[] { 1, 2, 3, 1 };
       var length = nums.Length;
       var memo = new int[length + 1];
       var max = new DynamicProgramming().RobHouse(nums, length, memo);
       Console.WriteLine("The max money is: " + max);
-      Console.ReadLine();
     }
 
     private static void TreeNodeHandler()
@@ -139,8 +163,66 @@ namespace ConsoleApp3
       }
     }
 
-  }
 
+    /// <summary>
+    /// Two sum
+    /// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+    ///You may assume that each input would have exactly one solution, and you may not use the same element twice.
+    ///You can return the answer in any order.
+    /// </summary>
+    /// <param name="nums"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public static int[] TwoSum(int[] nums, int target)
+    {
+      if (nums == null)
+        return null;
+      int[] result = new int[1];
+      Dictionary<int, int> dict = new Dictionary<int, int>();
+
+      for (int i = 0; i < nums.Length; i++)
+      {
+        int comp = target - nums[i];
+        if (dict.ContainsKey(comp))
+        {
+          int value;
+          dict.TryGetValue(comp, out value);
+          result = new int[] { value, i };
+          return result;
+        }
+        if (!dict.ContainsKey(nums[i]))
+          dict.Add(nums[i], i);
+      }
+      return null;
+    }
+
+    /// <summary>
+    ///  Generate subsets
+    /// </summary>
+    /// <param name="nums"></param>
+    /// <returns></returns>
+    public static List<List<int>> GetSubsets(int[] nums)
+    {
+      List<List<int>> subsets = new List<List<int>>();
+      int[] first = { };
+      subsets.Add(new List<int>(first));
+      foreach (var item in nums)
+      {
+        var currentResultSubsetSize = subsets.Count;
+        for (int i = 0; i < currentResultSubsetSize; i++)
+        {
+          var nextList = new List<int>(subsets[i]);
+          nextList.Add(item);
+          subsets.Add(nextList);
+        }
+
+      }
+      return subsets;
+    }
+
+
+  }
 }
+
 
 
