@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleApp3
 {
   internal class Program
   {
+
     private static void Main(string[] args)
     {
-      var arr = new int[] { 2, 7, 11, 15 };
-      var result = GetSubsets(arr);
-      foreach (var item in result)
-      {
-        Console.WriteLine(string.Join(',', item));
-      }
+
+      var arr = new int[] { 1, 1, 1, 2, 2, 2, 3, 4, 5, 6, 8, 8, 8, 8, 9999 };
+      CountOccurance(arr);
+      CountOccuranceUsingGroup(arr);
       Console.ReadLine();
     }
+
 
     private static void BuildAHashTableUsingCharArrays(string s)
     {
@@ -136,7 +137,10 @@ namespace ConsoleApp3
       }
     }
 
-
+    /// <summary>
+    /// Print Permutations
+    /// </summary>
+    /// <param name="s"></param>
     public static void PrintPermutions(string s)
     {
       PrintPermutions("", s);
@@ -220,7 +224,28 @@ namespace ConsoleApp3
       return subsets;
     }
 
+    public static void CountOccurance(int[] nums)
+    {
+      var dict = new Dictionary<int, int>();
 
+      foreach (var item in nums)
+      {
+        if (dict.ContainsKey(item))
+        {
+          dict[item] = dict[item] + 1;
+        }
+        else
+          dict.Add(item, 1);
+      }
+      dict.Select(i => $"{i.Key}: {i.Value}").ToList().ForEach(Console.WriteLine);
+    }
+
+
+    public static void CountOccuranceUsingGroup(int[] nums)
+    {
+      var theDict = nums.GroupBy(num => num).ToDictionary(n => n.Key, n => n.Count());
+      theDict.Select(i => $"{i.Key}: {i.Value}").ToList().ForEach(Console.WriteLine);
+    }
   }
 }
 
