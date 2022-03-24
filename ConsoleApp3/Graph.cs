@@ -125,6 +125,7 @@ namespace ConsoleApp3
         foreach (var item in node.adjacent)
         {
           nextToVisit.Enqueue(item);
+          Console.WriteLine($" Log Vertex { item.Id}");
         }
 
       }

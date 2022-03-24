@@ -227,7 +227,7 @@ namespace ConsoleApp3
     public static void CountOccurance(int[] nums)
     {
       var dict = new Dictionary<int, int>();
-
+      var max = int.MinValue;
       foreach (var item in nums)
       {
         if (dict.ContainsKey(item))
@@ -236,8 +236,10 @@ namespace ConsoleApp3
         }
         else
           dict.Add(item, 1);
+        max = Math.Max(max, dict[item]);
       }
       dict.Select(i => $"{i.Key}: {i.Value}").ToList().ForEach(Console.WriteLine);
+      Console.WriteLine("The max value is: " + max);
     }
 
 

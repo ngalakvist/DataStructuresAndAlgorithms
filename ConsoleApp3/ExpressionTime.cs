@@ -8,8 +8,6 @@
       var sum = nums.Aggregate((x, y) => x + y);
       return sum;
     }
-
-
     public abstract string FirstAndLast(int[] nums);
 
   }

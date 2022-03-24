@@ -19,4 +19,6 @@ namespace ConsoleApp3
       private int GetParentIndex(int childIndex) { return (childIndex - 1) / 2; }
     }
   }
+
+
 }
