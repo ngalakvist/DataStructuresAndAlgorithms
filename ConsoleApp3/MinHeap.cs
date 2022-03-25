@@ -29,7 +29,7 @@
       }
     }
 
-    private override void ReCalculateUp()
+    public override void ReCalculateUp()
     {
       var index = _size - 1;
       while (!IsRoot(index) && _elements[index] < GetParent(index))
