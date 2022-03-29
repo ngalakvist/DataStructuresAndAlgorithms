@@ -11,7 +11,10 @@ namespace ConsoleApp3
     {
       var twit = new Twitter();
       twit.PostTweet(1, 1);
-
+      twit.PostTweet(2, 1);
+      twit.Follow(1, 2);
+      var newsFeed = twit.GetNewsFeed(1);
+      newsFeed.ForEach(s => Console.WriteLine(s));
       Console.ReadLine();
     }
 
