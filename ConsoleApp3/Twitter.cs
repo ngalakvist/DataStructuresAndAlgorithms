@@ -35,9 +35,16 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
    */
   public class Twitter
   {
+    private Dictionary<int, HashSet<int>> followMap;
+    public Dictionary<int, HashSet<int>> FollowMap { get => followMap; set => followMap = value; }
+
+    private Dictionary<int, List<int>> tweetMap;
+    public Dictionary<int, List<int>> TweetMap { get => tweetMap; set => tweetMap = value; }
+
     public Twitter()
     {
-
+      FollowMap = new Dictionary<int, HashSet<int>>();
+      TweetMap = new Dictionary<int, List<int>>();
     }
 
     /// <summary>
@@ -48,7 +55,14 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
     /// <param name="tweetId"></param>
     public void PostTweet(int userId, int tweetId)
     {
+      var list = tweetMap.GetValueOrDefault(userId);
+      if (list == null)
+      {
+        list = new List<int>();
+      }
 
+      list.Add(tweetId);
+      tweetMap.Add(userId, list);
     }
 
     /// <summary>
@@ -71,7 +85,13 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
     /// <param name="followeeId"></param>
     public void Follow(int followerId, int followeeId)
     {
-
+      var hashSet = followMap.GetValueOrDefault(followerId);
+      if (hashSet == null)
+      {
+        hashSet = new HashSet<int>();
+      }
+      hashSet.Add(followeeId);
+      followMap.Add(followerId, hashSet);
     }
 
     /// <summary>
@@ -81,7 +101,8 @@ twitter.getNewsFeed(1);  // User 1's news feed should return a list with 1 tweet
     /// <param name="followeeId"></param>
     public void Unfollow(int followerId, int followeeId)
     {
-
+      var hashSet = followMap.GetValueOrDefault(followerId);
+      hashSet.Remove(followeeId);
     }
   }
 }

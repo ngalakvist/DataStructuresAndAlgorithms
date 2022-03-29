@@ -2,6 +2,9 @@
 
 namespace ConsoleApp3
 {
+  /// <summary>
+  /// Heap Datastructure
+  /// </summary>
   public abstract class Heap
   {
     protected readonly int[] _elements;
