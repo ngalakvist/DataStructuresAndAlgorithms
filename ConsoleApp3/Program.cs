@@ -9,6 +9,7 @@ namespace ConsoleApp3
 
     private static void Main(string[] args)
     {
+      PrintList();
       var twit = new Twitter();
       twit.PostTweet(1, 1);
       twit.PostTweet(2, 1);
@@ -249,6 +250,12 @@ namespace ConsoleApp3
     {
       var theDict = nums.GroupBy(num => num).ToDictionary(n => n.Key, n => n.Count());
       theDict.Select(i => $"{i.Key}: {i.Value}").ToList().ForEach(Console.WriteLine);
+    }
+
+    public static void PrintList()
+    {
+      var list = new List<int>() { 2, 4, 5, 6, 7, 7, 7, 78, 8, 78, 7, 8, 8, 78, 78, 7, 8 };
+      list.ForEach(i => Console.WriteLine("Func Printing " + i));
     }
   }
 }
