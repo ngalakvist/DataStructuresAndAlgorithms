@@ -22,9 +22,12 @@
       if (value <= Data)
       {
         if (Left == null)
+        {
           Left = new TreeNode(value);
-        else
-          Left.Insert(value);
+          return;
+        }
+
+        Left.Insert(value);
       }
       else
       {

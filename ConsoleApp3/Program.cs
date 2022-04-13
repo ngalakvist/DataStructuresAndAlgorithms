@@ -9,12 +9,16 @@ namespace ConsoleApp3
 
     private static void Main(string[] args)
     {
-
+      var game = new Game(Console.ReadLine, Console.WriteLine);
+      game.Play();
+      Game g = new();
+      g.Play();
       var arr = new int[] { 1, 1, 1, 2, 2, 2, 3, 4, 5, 6, 8, 8, 8, 8, 9999 };
       CountOccurance(arr);
+
       CountOccuranceUsingGroup(arr);
       Console.ReadLine();
-      //
+
     }
 
 
